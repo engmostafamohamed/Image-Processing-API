@@ -10,3 +10,10 @@ Tools
 -Typescript
 -Jasmine For testing
 -images folder
+
+how to run server(nodemon)
+-npm run start
+how to test by jasmine
+-npm run fix
+how to run prettier
+-npm run format
