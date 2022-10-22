@@ -16,9 +16,18 @@ const supertest_1 = __importDefault(require("supertest"));
 const index_1 = __importDefault(require("../routes/index"));
 const request = (0, supertest_1.default)(index_1.default);
 describe("Test endpoint responses", () => {
-    it("gets  for display home page endpoint", (done) => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield request.get("/");
-        expect(response.status).toBe(200);
-        done();
+    // it("gets  for display home page endpoint", async (done) => {
+    //     const response = await request.get("/")
+    //     expect(response.status).toBe(200)
+    //     done()
+    // })
+    it("gets  for display home page endpoint", () => __awaiter(void 0, void 0, void 0, function* () {
+        function getfun(url) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const response = yield fetch(url);
+                return expect(response.status).toBe(200);
+            });
+        }
+        getfun("http://localhost:3000/").then((res) => console.log(res));
     }));
 });
