@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -18,7 +9,7 @@ const path_1 = require("path");
 const sharp_1 = __importDefault(require("sharp"));
 const path_2 = __importDefault(require("path"));
 // function to resizing image
-const resizeFunc = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const resizeFunc = async (req, res) => {
     //this is sample data to represent database
     const data = [
         "encenadaport",
@@ -66,7 +57,7 @@ const resizeFunc = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     else {
         //if name of image not found in resizing folder
         try {
-            yield (0, sharp_1.default)(imagePath)
+            await (0, sharp_1.default)(imagePath)
                 .resize(width, height)
                 .toFile(`./resizing/${imageFormate}`);
         }
@@ -87,5 +78,5 @@ const resizeFunc = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             // return res.status(404).send(`Error happend.${error}`)
         }
     }
-});
+};
 exports.default = resizeFunc;

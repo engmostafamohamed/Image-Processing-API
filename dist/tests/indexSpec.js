@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 // import supertest from "supertest"
 // import routes from "../routes/index"
 // const request = supertest(routes)
@@ -17,13 +8,11 @@ describe("Test endpoint responses", () => {
     //     expect(response.status).toBe(200)
     //     done()
     // })
-    it("gets  for display home page endpoint", () => __awaiter(void 0, void 0, void 0, function* () {
-        function getfun(url) {
-            return __awaiter(this, void 0, void 0, function* () {
-                const response = yield fetch(url);
-                return expect(response.status).toBe(200);
-            });
+    it("gets  for display home page endpoint", async () => {
+        async function getfun(url) {
+            const response = await fetch(url);
+            return expect(response.status).toBe(200);
         }
         getfun("http://localhost:3000/").then((res) => console.log(res));
-    }));
+    });
 });
