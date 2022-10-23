@@ -59,16 +59,23 @@ const resizeFunc = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     //rename image
     const imageFormate = `${imageName}_${width}_${height}.jpg`;
     //resizing image by using height and width
-    try {
-        yield (0, sharp_1.default)(imagePath)
-            .resize(width, height)
-            .toFile(`./resizing/${imageFormate}`);
+    if ((0, fs_1.existsSync)(readFile(imageFormate)) === true) {
+        //if name of image found in resizing folder
+        res.sendFile(readFile(imageFormate));
     }
-    catch (error) {
-        return res.status(404).send(`Error happend.${error}`);
+    else {
+        //if name of image not found in resizing folder
+        try {
+            yield (0, sharp_1.default)(imagePath)
+                .resize(width, height)
+                .toFile(`./resizing/${imageFormate}`);
+        }
+        catch (error) {
+            return res.status(404).send(`Error happend.${error}`);
+        }
+        res.sendFile(readFile(imageFormate));
+        // res.status(200).send('done')
     }
-    res.sendFile(readFile(imageFormate));
-    // res.status(200).send('done')
     //function get image name and return path resizing folder
     function readFile(image) {
         try {

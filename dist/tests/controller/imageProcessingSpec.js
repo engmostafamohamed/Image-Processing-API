@@ -14,8 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // import resizeFunc from "../../controller/imageProcessing";
 const supertest_1 = __importDefault(require("supertest"));
-const index_1 = __importDefault(require("../../routes/index"));
-const request = (0, supertest_1.default)(index_1.default);
+const imageProcessing_1 = __importDefault(require("../../controller/imageProcessing"));
+const request = (0, supertest_1.default)(imageProcessing_1.default);
 describe("Test for resizeFunc", () => {
     // it("should return error if image name does not exist", async () => {
     //     await request.get("/photo?name=noImage&width=800&height=1800").then((response) => {
@@ -65,5 +65,14 @@ describe("Test for resizeFunc", () => {
             });
         }
         getfun("http://localhost:3000/photo?name=icelandwaterfall&width=800&height=number").then((res) => console.log(res));
+    }));
+    it("should return error if image path not found ", () => __awaiter(void 0, void 0, void 0, function* () {
+        function getfun(url) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const response = yield fetch(url);
+                return expect(response.text).toBe('please enter valid name');
+            });
+        }
+        getfun("http://localhost:3000/photo?name=&width=800&height=800").then((res) => console.log(res));
     }));
 });

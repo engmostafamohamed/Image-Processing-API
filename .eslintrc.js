@@ -1,4 +1,5 @@
-module.exports = {
+// eslint-disable-next-line no-undef
+module.export = {
   env: {
     browser: true,
     es2021: true,
@@ -11,7 +12,6 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 13,
-    sourceType: 'module',
   },
   plugins: ['@typescript-eslint', 'prettier'],
   rules: {

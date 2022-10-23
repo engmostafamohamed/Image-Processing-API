@@ -1,6 +1,6 @@
 // import resizeFunc from "../../controller/imageProcessing";
 import supertest from "supertest"
-import routes from "../../routes/index"
+import routes from "../../controller/imageProcessing"
 const request = supertest(routes)
 describe("Test for resizeFunc", () => {
     // it("should return error if image name does not exist", async () => {
@@ -56,6 +56,16 @@ describe("Test for resizeFunc", () => {
         }
 
         getfun("http://localhost:3000/photo?name=icelandwaterfall&width=800&height=number").then((res) =>
+            console.log(res)
+        )
+    })
+
+    it("should return error if image path not found ", async () => {
+        async function getfun(url: RequestInfo | URL) {
+            const response = await fetch(url)
+            return expect(response.text).toBe('please enter valid name')
+        }
+        getfun("http://localhost:3000/photo?name=&width=800&height=800").then((res) =>
             console.log(res)
         )
     })
